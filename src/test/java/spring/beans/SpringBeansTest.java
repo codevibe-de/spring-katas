@@ -1,13 +1,13 @@
 package spring.beans;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.time.LocalDateTime;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class SpringBeansTest {
 
     private AnnotationConfigApplicationContext context;
@@ -20,6 +20,7 @@ public class SpringBeansTest {
 
 
     @Test
+    @Order(1)
     void notEmptyContext() {
         // when
         int count = context.getBeanDefinitionCount();
@@ -30,6 +31,7 @@ public class SpringBeansTest {
 
 
     @Test
+    @Order(2)
     void someServiceExists() {
         // when
         SomeService someService = context.getBean(SomeService.class);
@@ -40,6 +42,7 @@ public class SpringBeansTest {
 
 
     @Test
+    @Order(3)
     void complexServiceExists() {
         // when
         SomeService someService = context.getBean(SomeService.class);
@@ -50,6 +53,7 @@ public class SpringBeansTest {
 
 
     @Test
+    @Order(4)
     void stringBuilderBeanExists() {
         // when -- if bean is missing an exception is thrown
         StringBuilder stringBuilder = context.getBean(StringBuilder.class);
@@ -60,6 +64,7 @@ public class SpringBeansTest {
 
 
     @Test
+    @Order(5)
     void methodInjection() {
         // when
         ComplexService1 complexService1 = context.getBean(ComplexService1.class);
@@ -71,6 +76,7 @@ public class SpringBeansTest {
 
 
     @Test
+    @Order(6)
     void fieldInjection() {
         // when
         ComplexService2 complexService2 = context.getBean(ComplexService2.class);
@@ -82,6 +88,7 @@ public class SpringBeansTest {
 
 
     @Test
+    @Order(7)
     void scopedBean() throws InterruptedException {
         // when
         LocalDateTime dateTime1 = context.getBean(LocalDateTime.class);
