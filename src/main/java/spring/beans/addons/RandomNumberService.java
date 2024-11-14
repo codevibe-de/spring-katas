@@ -1,6 +1,6 @@
 package spring.beans.addons;
 
-// No Annotations may be added here
+// No annotations may be added here
 public class RandomNumberService {
 
     private final RandomNumberGenerator generator;
