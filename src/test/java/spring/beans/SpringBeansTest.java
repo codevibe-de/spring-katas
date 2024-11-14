@@ -5,9 +5,11 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import spring.beans.addons.RandomNumberGenerator;
 import spring.beans.addons.RandomNumberService;
 import spring.beans.main.ComplexService;
+import spring.beans.main.SomeComponent;
 import spring.beans.main.SomeService;
 
 import java.time.LocalDateTime;
+import java.util.function.Supplier;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -60,6 +62,19 @@ public class SpringBeansTest {
         assertThat(complexService.getSomeService()).isNotNull();
         assertThat(complexService.getRandomNumberService()).isNotNull();
         assertThat(complexService.getStringBuilder()).isNotNull();
+    }
+
+
+    /**
+     * Tip: Requires creating a new class in the main package.
+     */
+    @Test
+    @Order(6)
+    void qualifiedAutowiring() {
+        // when
+        Supplier<SomeComponent> bean = context.getBean("supplyingService", Supplier.class);
+        // then
+        assertThat(bean.get().getIndex()).isEqualTo(2);
     }
 
 

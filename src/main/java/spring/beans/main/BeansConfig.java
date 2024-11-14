@@ -24,4 +24,14 @@ public class BeansConfig {
         return new StringBuilder("START");
     }
 
+    @Bean
+    public SomeComponent someComponent1() {
+        return new SomeComponent(1);
+    }
+
+    @Bean
+    public SomeComponent someComponent2() {
+        return new SomeComponent(2);
+    }
+
 }
