@@ -28,27 +28,36 @@ public class SpringBeansTest {
     @Test
     @Order(2)
     void beanOfTypeSomeServiceExists() {
-        // when -- if bean is missing an exception is thrown
-        context.getBean(SomeService.class);
+        // when/then -- if bean is missing, an exception is thrown
+        Assertions.assertDoesNotThrow(
+                () -> context.getBean(SomeService.class)
+        );
     }
 
 
     @Test
     @Order(3)
     void beanOfTypeStringBuilderExists() {
-        // when -- if bean is missing an exception is thrown
-        StringBuilder stringBuilder = context.getBean(StringBuilder.class);
-        // then
-        assertThat(stringBuilder).startsWith("START");
+        // when/then -- if bean is missing, an exception is thrown
+        Assertions.assertDoesNotThrow(
+                () -> {
+                    StringBuilder stringBuilder = context.getBean(StringBuilder.class);
+                    assertThat(stringBuilder).startsWith("START");
+                }
+        );
     }
 
 
     @Test
     @Order(4)
     void beanOfTypeRandomNumberServiceExists() {
-        // when -- if bean is missing an exception is thrown
-        context.getBean(RandomNumberGenerator.class);
-        context.getBean(RandomNumberService.class);
+        // when/then -- if bean is missing, an exception is thrown
+        Assertions.assertDoesNotThrow(
+                () -> {
+                    context.getBean(RandomNumberGenerator.class);
+                    context.getBean(RandomNumberService.class);
+                }
+        );
     }
 
 
